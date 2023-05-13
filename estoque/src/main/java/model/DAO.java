@@ -1,0 +1,151 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class DAO {
+	/** Módulo de conexão **/
+
+    //conector jar
+    private String driver = "com.mysql.cj.jdbc.Driver";
+    // informações de conexão com o banco de dados
+    private String url = "jdbc:mysql://localhost:3306/projeto1?useTimezone=true&serverTimezone=UTC";
+    private String user = "root";
+    private String senha = "";
+    private Connection conexao;
+    private PreparedStatement preparado;
+    private ResultSet result;
+    private ArrayList<JavaBeans> lista = new ArrayList<>();
+    private Statement stat;
+    
+
+    //Metodo para realizar conexão    
+    public Connection conectar() {
+        try {
+            Class.forName(driver);
+            conexao = DriverManager.getConnection(url,user,senha);
+            return conexao;
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+  //Metodo para fazer a inserção no banco de dados
+    public void inserir(JavaBeans produto) {
+        conexao = conectar(); // inicializa a conexão
+        String dadosDoSql = "INSERT INTO produto (codigo,nome,"
+                +"categoria,valor,quantidade) VALUES (?,?,?,?,?)";
+        try {
+            preparado = conexao.prepareStatement(dadosDoSql);
+            preparado.setInt(1, produto.getCodigo());
+            preparado.setString(2, produto.getNome());
+            preparado.setString(3, produto.getCategoria());
+            preparado.setFloat(4, produto.getValor());
+            preparado.setInt(5, produto.getQuantidade());
+            preparado.executeUpdate();// Executa a inserção no banco de dados
+            System.out.println("inserido os dados");
+        }catch(SQLException ex) {
+            System.out.println("Deu erro ao inserir os dados:"+ ex.getMessage());
+        }
+    }
+    
+    
+    //metodo pra pesquisar tudo
+    public lista<JavaBeans> listarTodaTabela() {
+    	lista<JavaBeans> lista = new ArrayList<>();
+        String selectTabela = "SELECT * FROM produto";
+        try (Statement statement = conexao.createStatement();
+             ResultSet resultSet = statement.executeQuery(selectTabela)) {
+            while (resultSet.next()) {
+                JavaBeans produtos = new JavaBeans();
+                produtos.setId(resultSet.getInt("id"));
+                produtos.setCodigo(resultSet.getInt("codigo"));
+                produtos.setNome(resultSet.getString("nome"));
+                produtos.setCategoria(resultSet.getString("categoria"));
+                produtos.setValor(resultSet.getFloat("valor"));
+                produtos.setQuantidade(resultSet.getInt("quantidade"));
+                lista.add(produtos);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro ao listar: " + ex.getMessage());
+        }
+        return lista;
+    }
+  		
+    public void atualizarTabela(JavaBeans produto) {
+        String atualizar = "UPDATE produto SET codigo = ?, nome = ?, categoria = ?, valor = ?, quantidade = ? WHERE id = ?";
+        try {
+            preparado = conexao.prepareStatement(atualizar);
+            preparado.setInt(1, produto.getCodigo());
+            preparado.setString(2, produto.getNome());
+            preparado.setString(3, produto.getCategoria());
+            preparado.setFloat(4, produto.getValor());
+            preparado.setInt(5, produto.getQuantidade());
+            preparado.setInt(6, produto.getId());
+            preparado.executeUpdate();
+            System.out.println("Tabela atualizada com sucesso!");
+        } catch(SQLException ex) {
+            System.out.println("Deu erro ao atualizar a tabela: "+ ex.getMessage());
+        } finally {
+            try {
+                if(preparado != null) {
+                    preparado.close();
+                }
+            } catch(SQLException ex) {
+                System.out.println("Erro ao fechar o preparado: "+ex.getMessage());
+            }
+        }
+    }
+  		
+  //metodo para pesquisar por categoria
+    public ArrayList<JavaBeans> listarPorCategoria(String valor) {
+        String sql = "SELECT * FROM produto WHERE categoria LIKE '%"+valor+"%'";
+        try {
+            stat = conexao.createStatement();
+            result = stat.executeQuery(sql);
+            while(result.next()) {
+                JavaBeans produto = new JavaBeans();
+                produto.setId(result.getInt("id"));
+                produto.setCodigo(result.getInt("codigo"));
+                produto.setNome(result.getString("nome"));
+                produto.setCategoria(result.getString("categoria"));
+                produto.setValor(result.getFloat("valor"));
+                produto.setQuantidade(result.getInt("quantidade"));
+                lista.add(produto);
+            }
+        } catch(SQLException ex) {
+            System.out.println("Deu erro na lista por categoria: "+ex.getMessage());
+        }
+        return lista;
+    }
+  	    
+    // Método para excluir da tabela
+    public void excluirDaTabela(int valor) {
+        String excluirValorDigitado = "DELETE FROM produto WHERE id = ?";
+        try {
+            preparado = conexao.prepareStatement(excluirValorDigitado);
+            preparado.setInt(1, valor);
+            preparado.executeUpdate();
+            System.out.println("Dados excluídos com sucesso");
+        } catch(SQLException ex) {
+            System.out.println("Deu erro ao tentar excluir dados da tabela: " + ex.getMessage());
+        }
+    }
+
+    //Método para fechar a conexão
+    public void fecharConexao() {
+        try {
+            if(conexao != null) {
+                conexao.close();
+            }
+        } catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+}
