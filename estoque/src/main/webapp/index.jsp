@@ -43,7 +43,7 @@
 
     DAO banco = new DAO();
     if(categoria == "" || categoria == null){
-      ArrayList<JavaBeans> lista = banco.listarTodaTabela();
+      ArrayList<JavaBeans> lista = banco.listarTodaTabela;
       for(int i = 0; i < lista.size(); i++){
         out.print("<tr>");
         out.print("<td>"+lista.get(i).getId()+"</td>");
