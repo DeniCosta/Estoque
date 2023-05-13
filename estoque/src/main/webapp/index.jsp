@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<%@page import="model.JavaBeans" %>
-<%@page import= "model.DAO" %>
-
-<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="model.JavaBeans" %>
+<%@ page import="model.DAO" %>
+<%@ page import="model.Conexao" %>
+<%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,87 +13,93 @@
   <title>INDEX</title>
 </head>
 <body>
-<div class="container">
-<form class="firstForm" action="index.jsp" method="post">
-  <label>CATEGORIA</label><br>
-  <input type="text" name="categoria"/><br>
-  <button type="submit"> PESQUISAR</button><br>
-  <span>é a vida né</span>
+  <div class="container">
+    <form class="firstForm" action="index.jsp" method="post">
+      <label>CATEGORIA</label><br>
+      <input type="text" name="categoria" value="<%=String.valueOf(request.getParameter("categoria")) %>"/><br>
+      <button type="submit">PESQUISAR</button><br>
+    </form>
 
-</form>
+    <form action="inserir.jsp">
+      <button type="submit">NOVO CADASTRO</button>
+    </form>
+    
+    <form action="excluir.jsp">
+      <button type="submit">EXCLUIR CADASTRO</button>
+    </form>
 
-<form action="inserir.jsp"><br>
-  <button type="submit">NOVO CADASTRO</button>
-</form>
-<%
-  String categoria = request.getParameter("categoria");
-  try{
-    out.print("<table border='0'>");
-    out.print("<tr>");
-    out.print("<th>ID</th>");
-    out.print("<th>CODIGO</th>");
-    out.print("<th>NOME</th>");
-    out.print("<th>CATEGORIA</th>");
-    out.print("<th>VALOR</th>");
-    out.print("<th>QUANTIDADE</th>");
-    out.print("<th>EDITAR</th>");
-    out.print("<th>EXCLUIR</th>");
-    out.print("</tr>");
+    <table border='1'>
+      <tr>
+        <th>ID</th>
+        <th>CODIGO</th>
+        <th>NOME</th>
+        <th>CATEGORIA</th>
+        <th>VALOR</th>
+        <th>QUANTIDADE</th>
+        <th>EDITAR</th>
+       
+      </tr>
+      
+      <%
+      try {
+        Conexao conexao = new Conexao();
+        DAO banco = new DAO();
 
-    DAO banco = new DAO();
-    if(categoria == "" || categoria == null){
-      ArrayList<JavaBeans> lista = banco.listarTodaTabela;
-      for(int i = 0; i < lista.size(); i++){
-        out.print("<tr>");
-        out.print("<td>"+lista.get(i).getId()+"</td>");
-        out.print("<td>"+lista.get(i).getCodigo()+"</td>");
-        out.print("<td>"+lista.get(i).getNome()+"</td>");
-        out.print("<td>"+lista.get(i).getCategoria()+"</td>");
-        out.print("<td>"+lista.get(i).getValor()+"</td>");
-        out.print("<td>"+lista.get(i).getQuantidade()+"</td>");
+        // Obter o valor do parâmetro "categoria"
+        
+        String categoria = request.getParameter("categoria");
 
-        out.print("<td><a href='alterar.jsp?id="+lista.get(i).getId()+
-
-                "&codigo="+lista.get(i).getCodigo()+
-                "&nome="+lista.get(i).getNome()+
-                "&categoria="+lista.get(i).getCategoria()+
-                "&valor="+lista.get(i).getValor()+
-                "&quantidade"+lista.get(i).getQuantidade()+" '>CLIQUE</a></td>");
-        out.print("<td><a href='excluir.jsp?id="+lista.get(i).getId()+
-                "&id="+lista.get(i).getId()+
-                "'>CLIQUE</a></td>");
-        out.print("</tr>");
+        // Verificar se a categoria foi fornecida
+        if (categoria != null && !categoria.isEmpty()) {
+          // Filtrar os resultados da consulta por categoria
+          ArrayList<JavaBeans> lista = banco.listarPorCategoria(categoria);
+          for (int i = 0; i < lista.size(); i++) {
+            JavaBeans bean = lista.get(i);
+      %>
+      
+      <tr>
+        <td><%= bean.getId() %></td>
+        <td><%= bean.getCodigo() %></td>
+        <td><%= bean.getNome() %></td>
+        <td><%= bean.getCategoria() %></td>
+        <td><%= bean.getValor() %></td>
+        <td><%= bean.getQuantidade() %></td>
+        <td><a href='alterar.jsp'>CLIQUE</a></td>
+        
+      </tr>
+      
+      <%
+          }
+        } else {
+          // Retorna todos os registros se nenhuma categoria for especificada
+          ArrayList<JavaBeans> lista = banco.ListarTodaTabela();
+          for (int i = 0; i < lista.size(); i++) {
+            JavaBeans bean = lista.get(i);
+      %>
+      
+      <tr>
+        <td><%= bean.getId() %></td>
+        <td><%= bean.getCodigo() %></td>
+        <td><%= bean.getNome() %></td>
+        <td><%= bean.getCategoria() %></td>
+        <td><%= bean.getValor() %></td>
+        <td><%= bean.getQuantidade() %></td>
+                <td><a href='alterar.jsp'>CLIQUE</a></td>
+       
+      </tr>
+      
+      <%
+          }
+        }
+        
+        conexao.fecharConexao();
+      } catch (Exception erro) {
+        out.println("Deu Erro no index: " + erro.getMessage());
       }
-
-    }else{
-      ArrayList<JavaBeans> lista = banco.listarPorCategoria(categoria);
-      for(int i = 0; i < lista.size(); i++){
-        out.print("<tr>");
-        out.print("<td>"+lista.get(i).getId()+"</td>");
-        out.print("<td>"+lista.get(i).getCodigo()+"</td>");
-        out.print("<td>"+lista.get(i).getNome()+"</td>");
-        out.print("<td>"+lista.get(i).getCategoria()+"</td>");
-        out.print("<td>"+lista.get(i).getValor()+"</td>");
-        out.print("<td>"+lista.get(i).getQuantidade()+"</td>");
-
-        out.print("<td><a href='alterar.jsp?id="+lista.get(i).getId()+
-
-                "&codigo="+lista.get(i).getCodigo()+
-                "&nome="+lista.get(i).getNome()+
-                "&categoria="+lista.get(i).getCategoria()+
-                "&valor="+lista.get(i).getValor()+
-                "&quantidade"+lista.get(i).getQuantidade()+" '>CLIQUE</a></td>");
-        out.print("<td><a href='excluir.jsp?id="+lista.get(i).getId()+
-                "&id="+lista.get(i).getId()+
-                "'>CLIQUE</a></td>");
-        out.print("</tr>");
-      }
-    }
-    out.print("</table");
-  } catch(Exception erro){
-    System.out.println("Deu Erro no index"+erro.getMessage());
-  }
-%>
-</div>
+      %>
+      
+    </table>
+  </div>
 </body>
 </html>
+
