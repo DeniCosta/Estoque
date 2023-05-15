@@ -16,7 +16,7 @@
   <div class="container">
     <form class="firstForm" action="index.jsp" method="post">
       <label>CATEGORIA</label><br>
-      <input type="text" name="categoria" value="<%=String.valueOf(request.getParameter("categoria")) %>"/><br>
+      <input type="text" name="categoria" /><br>
       <button type="submit">PESQUISAR</button><br>
     </form>
 
@@ -64,7 +64,7 @@
         <td><%= bean.getCategoria() %></td>
         <td><%= bean.getValor() %></td>
         <td><%= bean.getQuantidade() %></td>
-        <td><a href='alterar.jsp'>CLIQUE</a></td>
+        <td><a href='alterar.jsp?id=<%= bean.getId() %>'>CLIQUE</a></td>
         
       </tr>
       
@@ -84,7 +84,7 @@
         <td><%= bean.getCategoria() %></td>
         <td><%= bean.getValor() %></td>
         <td><%= bean.getQuantidade() %></td>
-                <td><a href='alterar.jsp'>CLIQUE</a></td>
+        <td><a href='alterar.jsp?id=<%= bean.getId() %>'>CLIQUE</a></td>
        
       </tr>
       
