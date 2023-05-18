@@ -56,7 +56,8 @@
           new DAO().atualizarTabela(produto);
           
           // Redirecione para a página index.jsp após a inserção
-          response.sendRedirect("index.jsp");
+          out.print("<script>alert('Produto alterado com sucesso')</script>");
+          out.print("<script>window.location.href='index.jsp';</script>");
     %>
         <p>Tabela atualizada com sucesso!</p>
     <% } %>

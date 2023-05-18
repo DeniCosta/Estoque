@@ -52,11 +52,14 @@
           produto.setValor(request.getParameter("valor"));
           produto.setQuantidade(request.getParameter("quantidade"));
 
+          
           // Chame o método de inserção no banco de dados
           new DAO().inserir(produto);
+          
 
           // Redirecione para a página index.jsp após a inserção
-          response.sendRedirect("index.jsp");
+          out.print("<script>alert('Produto cadastrado com sucesso')</script>");
+          out.print("<script>window.location.href='index.jsp';</script>");
     %>
         <p>Dados inseridos com sucesso!</p>
     <% } %>
