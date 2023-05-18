@@ -3,11 +3,16 @@
 <html>
 <head>
     <title>Inserir Produto</title>
+    <link rel="stylesheet" href="inserir.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Inserir Produto</h1>
+<div class="container">
+
+    		<div class="titulo"><h1>Inserir Produto</h1></div>
+    		<div class="formulario">
     <form action="inserir.jsp" method="post">
-       <label>CODIGO</label><br>
+    <label>CODIGO</label><br>
 	<input type="number" name="codigo"/><br>
 	<label>NOME</label><br>
 	<input type="text" name="nome"/><br>
@@ -17,13 +22,13 @@
 	<input type="number" name="valor"/><br>
 	<label>QUANTIDADE</label><br>
 	<input type="number" name="quantidade"/><br>
-	</br>
 	<button type="submit">CADASTRAR</button>
 	</form>
-	<form action="index.jsp"><br>
+	<form action="index.jsp">
 	<button type="submit">VOLTAR</button>
 	</form>
-	
+	</div>
+</div>
     <%-- Verifique se os parâmetros foram enviados --%>
     <% if (request.getParameter("codigo") != null &&
           request.getParameter("nome") != null &&
@@ -47,5 +52,6 @@
     %>
         <p>Dados inseridos com sucesso!</p>
     <% } %>
+     <a href="intro.jsp"><button class="inicio">Voltar<br>ao inicio</button></a>
 </body>
 </html>

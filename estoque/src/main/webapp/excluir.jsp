@@ -25,11 +25,16 @@ try {
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="excluir.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>Excluir</title>
 </head>
 <body>
+
+<div class="container">
+	<div class="titulo"><h1>Excluir</h1></div>
     <form>
-        <label>ID</label><br>
+        <label>Selecione o ID desejado</label><br>
         <input type="number" name="id" value="<%=request.getParameter("id") %>"/>
         <button type="submit">EXCLUIR</button>
     </form>
@@ -61,6 +66,8 @@ try {
     <form action="index.jsp">
         <button type="submit">VOLTAR</button>
     </form>
+    </div>
+     <a href="intro.jsp"><button class="inicio">Voltar<br>ao inicio</button></a>
 </body>
 </html>
 

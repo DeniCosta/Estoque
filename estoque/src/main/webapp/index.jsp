@@ -13,6 +13,8 @@
   <title>INDEX</title>
 </head>
 <body>
+<div class="titulo"><h1>Tabela do Estoque</h1></div>
+
   <div class="container">
     <form class="firstForm" action="index.jsp" method="post">
       <label>CATEGORIA</label><br>
@@ -100,6 +102,7 @@
       
     </table>
   </div>
+  <a href="intro.jsp"><button class="inicio">Voltar<br>ao inicio</button></a>
 </body>
 </html>
 

@@ -1,36 +1,72 @@
 @charset "utf-8";
 *{
     font-family: 'Roboto', sans-serif;
-    font-size: 15px;
     margin: 0;
     padding: 0;
+}
+body{
+	font-size: 15px;
+    background-color: rgb(247, 242, 242);
+}
+.titulo h1{	
+	font-size: 32px;
+    color: black;
+    border-bottom: solid 1px black;
+    display: flex;
+    padding: 10px;
+    box-shadow: 0px 0px 4px 1px #757575;
+    justify-content: center;
+    background-color: white;
 }
 .container{
     display: flex;
     flex-direction: column;
     gap: 10px;
     justify-content: center;
-    margin: 70px 200px 300px 200px;
-    border: 1px solid black;
+    margin: 55px 200px;
+    box-shadow: 0px 0px 4px 1px #757575;
     border-radius: 5px;
     padding: 15px;
+    background-color: white;
 }
 table{
     border-collapse: collapse;
 }
 tr{
-    background-color: gray;
+	color: white;
+    background-color: #580ef6;
 }
-button{
-    border: 1px solid black;
-    background-color: white;
-    color: black;
-    padding: 3px;
+td{
+	color: black;
+	background-color: white;
+	text-align: center;
+}
+a{
+	text-decoration: none;
+	color: black;
 }
 button:hover {
     cursor: pointer;
 }
-
+button{
+    border: none;
+    box-shadow: 0px 0px 0.5px 1px #757575;
+    padding: 5px;
+    cursor: pointer;
+    background-color: white;
+}
+.inicio:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    z-index: +1;
+}
+.inicio{
+	background-color:white;
+	margin: 10px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
 .firstForm{
     display: flex;
     gap: 5px;

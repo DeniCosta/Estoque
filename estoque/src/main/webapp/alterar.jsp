@@ -3,11 +3,16 @@
 <html>
 <head>
     <title>Atualizar Produto</title>
+    <link rel="stylesheet" href="alterar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Atualizar Produto</h1>
+<div class="container">
+<div class="titulo">
+    <h1>Atualizar Produto</h1></div>
+    <div class="formulario">
     <form action="alterar.jsp" method="post">
-      <label>ID</label><br>
+    <label>ID</label><br>
 	<input type="number" name="id" value="<%=request.getParameter("id") %>" readonly/><br>
 	<label>CODIGO</label><br>
 	<input type="number" name="codigo" /><br>
@@ -19,14 +24,15 @@
 	<input type="number" name="valor"/><br>
 	<label>QUANTIDADE</label><br>
 	<input type="text" name="quantidade" /><br>
-	</br>
+	
         <button type="submit">ALTERAR</button>
 	</form>
-	<form action="index.jsp"><br>
+	<form action="index.jsp">
 	<button type="submit">VOLTAR</button>
 	
     </form>
-
+    </div>
+</div>
     <%-- Verifique se os parâmetros foram enviados --%>
     <% if (request.getParameter("codigo") != null &&
           request.getParameter("nome") != null &&
@@ -51,5 +57,6 @@
     %>
         <p>Tabela atualizada com sucesso!</p>
     <% } %>
+     <a href="intro.jsp"><button class="inicio">Voltar<br>ao inicio</button></a>
 </body>
 </html>
