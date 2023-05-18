@@ -7,11 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<script src="validador.js"></script>
+
 <div class="container">
 <div class="titulo">
     <h1>Atualizar Produto</h1></div>
     <div class="formulario">
-    <form action="alterar.jsp" method="post">
+    <form action="alterar.jsp" method="post" name="form" onsubmit="return cadastrar()">
     <label>ID</label><br>
 	<input type="number" name="id" value="<%=request.getParameter("id") %>" readonly/><br>
 	<label>CODIGO</label><br>
@@ -43,11 +46,11 @@
           // Crie um objeto Produto com os parâmetros recebidos
           JavaBeans produto = new JavaBeans();
           produto.setId(Integer.parseInt(request.getParameter("id")));
-          produto.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+          produto.setCodigo(request.getParameter("codigo"));
           produto.setNome(request.getParameter("nome"));
           produto.setCategoria(request.getParameter("categoria"));
-          produto.setValor(Float.parseFloat(request.getParameter("valor")));
-          produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
+          produto.setValor(request.getParameter("valor"));
+          produto.setQuantidade(request.getParameter("quantidade"));
 
           // Chame o método de atualização no banco de dados
           new DAO().atualizarTabela(produto);

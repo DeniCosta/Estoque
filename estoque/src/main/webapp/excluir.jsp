@@ -28,16 +28,26 @@ try {
     <link rel="stylesheet" href="excluir.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>Excluir</title>
+    <script>
+        function confirme(id) {
+            let confirme = confirm("Confirma a exclusão");
+            if (confirme === true) {
+                window.location.href = "delete?id=" + id;
+            }
+        }
+    </script>  
 </head>
 <body>
 
 <div class="container">
 	<div class="titulo"><h1>Excluir</h1></div>
-    <form>
-        <label>Selecione o ID desejado</label><br>
-        <input type="number" name="id" value="<%=request.getParameter("id") %>"/>
-        <button type="submit">EXCLUIR</button>
-    </form>
+   <form>
+    <label>Selecione o ID desejado</label><br>
+    <input type="number" name="id" value="<%=request.getParameter("id") %>"/>
+        <button type="submit" onclick="confirme(<%=request.getParameter("id") %>)">EXCLUIR</button>
+        <table border='1'>
+</form>
+
     
     <table border='1'>
         <tr>
@@ -59,6 +69,7 @@ try {
             <td><%= bean.getCategoria() %></td>
             <td><%= bean.getValor() %></td>
             <td><%= bean.getQuantidade() %></td>
+            
         </tr>
         <% } %>
     </table>

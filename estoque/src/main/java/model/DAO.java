@@ -32,11 +32,11 @@ public class DAO {
         try {
         	conexao = new Conexao().conectar();
             preparado = conexao.prepareStatement(dadosDoSql);
-            preparado.setInt(1, produto.getCodigo());
+            preparado.setString(1, produto.getCodigo());
             preparado.setString(2, produto.getNome());
             preparado.setString(3, produto.getCategoria());
-            preparado.setFloat(4, produto.getValor());
-            preparado.setInt(5, produto.getQuantidade());
+            preparado.setString(4, produto.getValor());
+            preparado.setString(5, produto.getQuantidade());
             preparado.executeUpdate();// Executa a inserção no banco de dados
             System.out.println("inserido os dados");
         }catch(SQLException ex) {
@@ -55,11 +55,11 @@ public class DAO {
   				while(result.next()) {
   					JavaBeans produtos = new JavaBeans();
   					produtos.setId(result.getInt("id"));
-  					produtos.setCodigo(result.getInt("codigo"));
+  					produtos.setCodigo(result.getString("codigo"));
   					produtos.setNome(result.getString("nome"));
   					produtos.setCategoria(result.getString("categoria"));
-  					produtos.setValor(result.getFloat("valor"));
-  					produtos.setQuantidade(result.getInt("quantidade"));
+  					produtos.setValor(result.getString("valor"));
+  					produtos.setQuantidade(result.getString("quantidade"));
   					lista.add(produtos);
   				}
   				
@@ -74,11 +74,11 @@ public class DAO {
         try {
         	conexao = new Conexao().conectar();
             preparado = conexao.prepareStatement(atualizar);
-            preparado.setInt(1, produto.getCodigo());
+            preparado.setString(1, produto.getCodigo());
             preparado.setString(2, produto.getNome());
             preparado.setString(3, produto.getCategoria());
-            preparado.setFloat(4, produto.getValor());
-            preparado.setInt(5, produto.getQuantidade());
+            preparado.setString(4, produto.getValor());
+            preparado.setString(5, produto.getQuantidade());
             preparado.setInt(6, produto.getId());
             preparado.executeUpdate();
             System.out.println("Tabela atualizada com sucesso!");
@@ -105,11 +105,11 @@ public class DAO {
             while(result.next()) {
                 JavaBeans produto = new JavaBeans();
                 produto.setId(result.getInt("id"));
-                produto.setCodigo(result.getInt("codigo"));
+                produto.setCodigo(result.getString("codigo"));
                 produto.setNome(result.getString("nome"));
                 produto.setCategoria(result.getString("categoria"));
-                produto.setValor(result.getFloat("valor"));
-                produto.setQuantidade(result.getInt("quantidade"));
+                produto.setValor(result.getString("valor"));
+                produto.setQuantidade(result.getString("quantidade"));
                 lista.add(produto);
             }
         } catch(SQLException ex) {
@@ -119,13 +119,13 @@ public class DAO {
     }
   	    
     // Método para excluir da tabela
-    public void excluirDaTabela(int valor) {
+    public void excluirDaTabela(int id) {
         String excluirValorDigitado = "DELETE FROM produto WHERE id = ?";
         try {
         	conexao = new Conexao().conectar();
         	
             preparado = conexao.prepareStatement(excluirValorDigitado);
-            preparado.setInt(1, valor);
+            preparado.setInt(1, id);
             preparado.executeUpdate();
             System.out.println("Dados excluídos com sucesso");
         } catch(SQLException ex) {
