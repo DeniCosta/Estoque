@@ -48,11 +48,11 @@ try {
 				name="id" value="<%=request.getParameter("id") %>" />
 			<button type="submit"
 				onclick="confirme(<%=request.getParameter("id") %>)">EXCLUIR</button>
-			<table border='1'>
+			
 		</form>
 
 
-				<table border='1'>
+				<table>
 					<tr>
 						<th>ID</th>
 						<th>CODIGO</th>

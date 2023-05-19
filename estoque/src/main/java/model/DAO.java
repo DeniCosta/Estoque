@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -19,9 +18,7 @@ public class DAO {
     private ResultSet result;
     private ArrayList<JavaBeans> lista = new ArrayList<>();
     private Statement stat;
-    
-
-    //Metodo para realizar conexão    
+       
  
     
   //Metodo para fazer a inserção no banco de dados
