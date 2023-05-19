@@ -39,46 +39,51 @@ try {
 </head>
 <body>
 
-<div class="container">
-	<div class="titulo"><h1>Excluir</h1></div>
-   <form>
-    <label>Selecione o ID desejado</label><br>
-    <input type="number" name="id" value="<%=request.getParameter("id") %>"/>
-        <button type="submit" onclick="confirme(<%=request.getParameter("id") %>)">EXCLUIR</button>
-        <table border='1'>
-</form>
+	<div class="container">
+		<div class="titulo">
+			<h1>Excluir</h1>
+		</div>
+		<form>
+			<label>Selecione o ID desejado</label><br> <input type="number"
+				name="id" value="<%=request.getParameter("id") %>" />
+			<button type="submit"
+				onclick="confirme(<%=request.getParameter("id") %>)">EXCLUIR</button>
+			<table border='1'>
+		</form>
 
-    
-    <table border='1'>
-        <tr>
-            <th>ID</th>
-            <th>CODIGO</th>
-            <th>NOME</th>
-            <th>CATEGORIA</th>
-            <th>VALOR</th>
-            <th>QUANTIDADE</th>
-        </tr>
-        
-        <% for (int i = 0; i < lista.size(); i++) {
+
+				<table border='1'>
+					<tr>
+						<th>ID</th>
+						<th>CODIGO</th>
+						<th>NOME</th>
+						<th>CATEGORIA</th>
+						<th>VALOR</th>
+						<th>QUANTIDADE</th>
+					</tr>
+
+					<% for (int i = 0; i < lista.size(); i++) {
             JavaBeans bean = lista.get(i);
         %>
-        <tr>
-            <td><%= bean.getId() %></td>
-            <td><%= bean.getCodigo() %></td>
-            <td><%= bean.getNome() %></td>
-            <td><%= bean.getCategoria() %></td>
-            <td><%= bean.getValor() %></td>
-            <td><%= bean.getQuantidade() %></td>
-            
-        </tr>
-        <% } %>
-    </table>
+					<tr>
+						<td><%= bean.getId() %></td>
+						<td><%= bean.getCodigo() %></td>
+						<td><%= bean.getNome() %></td>
+						<td><%= bean.getCategoria() %></td>
+						<td><%= bean.getValor() %></td>
+						<td><%= bean.getQuantidade() %></td>
 
-    <form action="index.jsp">
-        <button type="submit">VOLTAR</button>
-    </form>
-    </div>
-     <a href="intro.jsp"><button class="inicio">Voltar<br>ao inicio</button></a>
+					</tr>
+					<% } %>
+				</table>
+
+				<form action="index.jsp">
+					<button type="submit">VOLTAR</button>
+				</form>
+				</div>
+				<a href="intro.jsp"><button class="inicio">
+						Voltar<br>ao inicio
+					</button></a>
 </body>
 </html>
 

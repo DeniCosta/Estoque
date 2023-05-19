@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.JavaBeans" %>
 <%@ page import="model.DAO" %>
 <%@ page import="model.Conexao" %>
@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="ISO-8859-1">
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <title>INDEX</title>
@@ -47,7 +47,7 @@
         Conexao conexao = new Conexao();
         DAO banco = new DAO();
 
-        // Obter o valor do parâmetro "categoria"
+        // Obter o valor do parÃ¢metro "categoria"
         
         String categoria = request.getParameter("categoria");
 
@@ -86,7 +86,7 @@
         <td><%= bean.getCategoria() %></td>
         <td><%= bean.getValor() %></td>
         <td><%= bean.getQuantidade() %></td>
-        <td><a href='alterar.jsp?id=<%= bean.getId() %>'>CLIQUE</a></td>
+        <td><a href='alterar.jsp?id=<%= bean.getId() %>'><img alt="Editar" src="assets/pencil.png" style="width: 10px; height: auto;"></a></td>
        
       </tr>
       

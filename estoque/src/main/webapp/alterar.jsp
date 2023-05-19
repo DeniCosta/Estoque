@@ -1,7 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.JavaBeans" %> <!-- Importe a classe JavaBeans correspondente -->
 <%@ page import="model.DAO" %>
 <html>
 <head>
+	<meta charset="UTF-8">
     <title>Atualizar Produto</title>
     <link rel="stylesheet" href="alterar.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -36,26 +38,25 @@
     </form>
     </div>
 </div>
-    <%-- Verifique se os parâmetros foram enviados --%>
+    <%-- Verifique se os parÃ¢metros foram enviados --%>
     <% if (request.getParameter("codigo") != null &&
           request.getParameter("nome") != null &&
           request.getParameter("categoria") != null &&
           request.getParameter("valor") != null &&
           request.getParameter("quantidade") != null) {
 
-          // Crie um objeto Produto com os parâmetros recebidos
+          // Crie um objeto Produto com os parÃ¢metros recebidos
           JavaBeans produto = new JavaBeans();
           produto.setId(Integer.parseInt(request.getParameter("id")));
-          produto.setCodigo(request.getParameter("codigo"));
+          produto.setCodigo(Integer.parseInt(request.getParameter("codigo")));
           produto.setNome(request.getParameter("nome"));
           produto.setCategoria(request.getParameter("categoria"));
-          produto.setValor(request.getParameter("valor"));
-          produto.setQuantidade(request.getParameter("quantidade"));
-
-          // Chame o método de atualização no banco de dados
+          produto.setValor(Integer.parseInt(request.getParameter("valor")));
+          produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
+          // Chame o mÃ©todo de atualizaÃ§Ã£o no banco de dados
           new DAO().atualizarTabela(produto);
           
-          // Redirecione para a página index.jsp após a inserção
+          // Redirecione para a pÃ¡gina index.jsp apÃ³s a inserÃ§Ã£o
           out.print("<script>alert('Produto alterado com sucesso')</script>");
           out.print("<script>window.location.href='index.jsp';</script>");
     %>

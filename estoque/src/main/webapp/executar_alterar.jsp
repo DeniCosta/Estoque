@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.JavaBeans" %>
 <%@ page import="model.DAO" %>
 
@@ -18,7 +18,7 @@ try {
 
     if (formSubmetido) {
         if (codigo.isEmpty() || nome.isEmpty() || valor.isEmpty() || quantidade.isEmpty() || idParam.isEmpty()) {
-            out.print("<script>alert('Campos obrigatórios!');</script>");
+            out.print("<script>alert('Campos obrigatÃ³rios!');</script>");
             response.sendRedirect("index.jsp");
         } else {
             int codigo1 = Integer.parseInt(codigo);

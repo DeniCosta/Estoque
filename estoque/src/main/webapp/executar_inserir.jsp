@@ -1,8 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="model.JavaBeans"%>
 <%@ page import="model.DAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 
 <%
     DAO bancoDados = new DAO();
