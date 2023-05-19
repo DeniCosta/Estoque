@@ -1,6 +1,6 @@
 <%@ page import="model.JavaBeans"%>
 <%@ page import="model.DAO"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=ISO-8859-1" language="java"%>
 <html>
 <head>
 <title>Inserir Produto</title>
@@ -38,13 +38,13 @@
 			</form>
 		</div>
 	</div>
-	<%-- Verifique se os parÃ¢metros foram enviados --%>
+	<%-- Verifique se os parâmetros foram enviados --%>
 	<%
 	if (request.getParameter("codigo") != null && request.getParameter("nome") != null
 			&& request.getParameter("categoria") != null && request.getParameter("valor") != null
 			&& request.getParameter("quantidade") != null) {
 
-		// Crie um objeto Produto com os parÃ¢metros recebidos
+		// Crie um objeto Produto com os parâmetros recebidos
 		JavaBeans produto = new JavaBeans();
 		produto.setCodigo(Integer.parseInt(request.getParameter("codigo")));
 		produto.setNome(request.getParameter("nome"));
@@ -52,10 +52,10 @@
 		produto.setValor(Integer.parseInt(request.getParameter("valor")));
 		produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
 
-		// Chame o mÃ©todo de inserÃ§Ã£o no banco de dados
+		// Chame o método de inserção no banco de dados
 		new DAO().inserir(produto);
 
-		// Redirecione para a pÃ¡gina index.jsp apÃ³s a inserÃ§Ã£o
+		// Redirecione para a página index.jsp após a inserção
 		out.print("<script>alert('Produto cadastrado com sucesso')</script>");
 		out.print("<script>window.location.href='index.jsp';</script>");
 	%>
